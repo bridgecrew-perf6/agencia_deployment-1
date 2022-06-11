@@ -1,0 +1,37 @@
+extends ./layout/index
+
+block contenido 
+    main.container.mt-5
+        h1.text-center.mt-5 #{title}
+
+        blockquote.text-center Lee sobre nuestros clientes y sus experiencias.
+
+        include ./layout/bloque_testimoniales
+
+        
+        .row
+            .col-md-12
+                h2.d-block.w-100.text-center Agrega un Testimonial
+
+                if(errores)
+                    each error in errores
+                        .alert.alert-danger.alert-dismissible.fade.show.mt-3.text-center.w-100= error.mensaje
+
+            .row.justify-content-center.col
+                .col-md-8
+                    form(action="/testimoniales" method="POST")
+                        .form-group
+                            label(for="nombre") Nombre
+                            .col-md-10
+                            input#nombre.form-control.form-control-md.text-md-left.w-100.bg-light.border-info.border-right-0.border-top-0.border-left-0.rounded-0(type="text", name="nombre", placeholder="Nombre", value=nombre)
+
+                        .form-group
+                            label(for="correo") Correo Electrónico
+                            .col-md-10
+                            input#nombre.form-control.form-control-md.text-md-left.w-100.bg-light.border-info.border-right-0.border-top-0.border-left-0.rounded-0(type="text", name="correo", placeholder="Tu Correo", value=correo)
+                        
+                        .form-group
+                            label(for="mensaje") Mensaje
+                            textarea#mensaje.form-control.form-control-md.text-md-left.w-100.bg-light.border-info.border-right-0.border-top-0.border-left-0.rounded-0(type="text", name="mensaje", placeholder="Mensaje")= mensaje
+
+                        input.btn.btn-success.btn-block.btn-lg(type="submit", value="Enviar")
